@@ -116,7 +116,17 @@
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
-  };
+    var result = [];
+    var found = 0;
+
+  _.each(array, function(item){
+    found = _.indexOf(result, item);
+    if (found === -1) {
+      result.push(item);
+    }
+  });
+  return result;
+};
 
 
   // Return the results of applying an iterator to each element.
