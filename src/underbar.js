@@ -50,6 +50,18 @@
   // Note: _.each does not have a return value, but rather simply runs the
   // iterator function over each item in the input collection.
   _.each = function(collection, iterator) {
+    // If an array, create a for loop with an function running 
+    // if object, create a for in loop with a function running
+
+    if (Array.isArray(collection)) {
+      for (var i = 0; i < collection.length; i ++) {
+        iterator(collection[i], i, collection);
+      }
+    } else if (collection instanceof Object) {
+      for (var key in collection) {
+        iterator(collection[key], key, collection);
+      }
+    }
   };
 
   // Returns the index at which value can be found in the array, or -1 if value
@@ -71,12 +83,35 @@
 
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, test) {
+    // Utilize the ability of each to iterate through each element
+
+    var result = []; 
+    _.each(collection, function(item) {
+      if (test(item)) {
+        result.push(item);
+      }
+    });
+    return result;
   };
 
   // Return all elements of an array that don't pass a truth test.
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
+    // use filter to create an array with elements that pass
+    // Then use indexOf to check the original array against the new filtered array
+    // if indexOf returns -1 then push into a diff array. 
+    var result = [];
+    var filteredArray = _.filter(collection, test) 
+    
+
+    _.each(collection, function(item) {
+      if (_.indexOf(filteredArray, item) === -1) {
+        result.push(item); 
+      }
+    });
+
+    return result; 
   };
 
   // Produce a duplicate-free version of the array.
