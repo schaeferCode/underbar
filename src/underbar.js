@@ -119,14 +119,14 @@
     var result = [];
     var found = 0;
 
-  _.each(array, function(item){
-    found = _.indexOf(result, item);
-    if (found === -1) {
-      result.push(item);
-    }
-  });
-  return result;
-};
+    _.each(array, function(item){
+      found = _.indexOf(result, item);
+      if (found === -1) {
+        result.push(item);
+      }
+    });
+    return result;
+  };
 
 
   // Return the results of applying an iterator to each element.
@@ -134,6 +134,17 @@
     // map() is a useful primitive iteration function that works a lot
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
+
+    // Create an empty array.
+    // Use each to run through the array and to apply the function (iterator).
+    // Push the result of the function on each element to the empty array.
+    // return array.
+
+    var result = [];
+    _.each(collection, function (item) {
+      return result.push(iterator(item))
+    });
+    return result;
   };
 
   /*
@@ -142,7 +153,7 @@
    * as an example of this.
    */
 
-  // Takes an array of objects and returns and array of the values of
+  // Takes an array of objects and returns an array of the values of
   // a certain property in it. E.g. take an array of people and return
   // an array of just their ages
   _.pluck = function(collection, key) {
