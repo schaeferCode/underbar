@@ -186,6 +186,19 @@
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
   _.reduce = function(collection, iterator, accumulator) {
+    // create empty variable to collection total.
+    // run each to run iterator over all elements and have the return equal total + return
+    // return total.
+
+    _.each(collection, function (item) {
+      if (accumulator === undefined) {
+        return accumulator = item;
+      } else {
+        accumulator = accumulator;
+      }
+      return accumulator = iterator(accumulator, item);
+    });
+    return accumulator;
   };
 
   // Determine if the array or object contains a given value (using `===`).
