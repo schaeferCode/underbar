@@ -194,9 +194,8 @@
       if (accumulator === undefined) {
         return accumulator = item;
       } else {
-        accumulator = accumulator;
+        return accumulator = iterator(accumulator, item);
       }
-      return accumulator = iterator(accumulator, item);
     });
     return accumulator;
   };
