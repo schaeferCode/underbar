@@ -189,15 +189,10 @@
     // create empty variable to collection total.
     // run each to run iterator over all elements and have the return equal total + return
     // return total.
-
-    _.each(collection, function (item) {
-      if (accumulator === undefined) {
-        return accumulator = item;
-      } else {
-        return accumulator = iterator(accumulator, item);
-      }
-    });
-    return accumulator;
+    accumulator = accumulator === undefined ? _.first(collection) : accumulator;
+    return _.last(_.map(collection, function(el) {
+        return accumulator = iterator(accumulator, el);
+    }));
   };
 
   // Determine if the array or object contains a given value (using `===`).
