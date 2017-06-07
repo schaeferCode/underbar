@@ -331,7 +331,7 @@
     };
   };
 
-  // Memorize an expensive function's results by storing them. You may assume
+  // Memoize an expensive function's results by storing them. You may assume
   // that the function only takes primitives as arguments.
   // memoize could be renamed to oncePerUniqueArgumentList; memoize does the
   // same thing as once, but based on many sets of unique arguments.
@@ -340,6 +340,17 @@
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+    var cache = {};
+    return function () {
+      var key = JSON.stringify(arguments);
+      if (cache[key]) {
+        return cache[key];
+      } else {
+        var value = func.apply(this, arguments);
+        cache[key] = value;
+        return value; 
+      }
+    }
   };
 
   // Delays a function for the given number of milliseconds, and then calls
@@ -349,6 +360,7 @@
   // parameter. For example _.delay(someFunction, 500, 'a', 'b') will
   // call someFunction('a', 'b') after 500ms
   _.delay = function(func, wait) {
+    return setTimeout.apply(this, arguments);
   };
 
 
